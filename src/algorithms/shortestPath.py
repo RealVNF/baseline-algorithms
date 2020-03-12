@@ -4,12 +4,13 @@ import os
 import random
 from collections import defaultdict
 from datetime import datetime
-from tqdm import tqdm
 from pathlib import Path
+
 from common.common_functionalities import normalize_scheduling_probabilities, create_input_file, \
     copy_input_files, get_ingress_nodes_and_cap
 from siminterface.simulator import Simulator
 from spinterface import SimulatorAction
+from tqdm import tqdm
 
 log = logging.getLogger(__name__)
 DATETIME = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

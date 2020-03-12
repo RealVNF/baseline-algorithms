@@ -14,7 +14,7 @@ algo='lb'
 #algo='sp'
 
 printf "\n\n-----------------------Running Non-RL Algo-------------------------\n\n"
-  
+
 paste $networks $service_functions $configs | while IFS="$(printf '\t')" read -r f1 f2 f3
 do
   paste $seeds | while IFS="$(printf '\t')" read -r f4

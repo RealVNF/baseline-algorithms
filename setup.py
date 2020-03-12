@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
 import os
+
+from setuptools import setup, find_packages
 
 os.system('pip install git+https://github.com/RealVNF/common-utils.git')
 os.system('pip install git+https://github.com/RealVNF/coordination-simulation.git')
-
 
 requirements = [
     'tqdm',
@@ -15,7 +15,6 @@ requirements = [
 test_requirements = [
     'flake8'
 ]
-
 
 setup(
     name='baseline-algorithms',

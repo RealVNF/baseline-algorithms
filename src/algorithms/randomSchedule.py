@@ -4,14 +4,15 @@ import os
 import random
 from collections import defaultdict
 from datetime import datetime
-from random import uniform
-from tqdm import tqdm
 from pathlib import Path
+from random import uniform
+
 from common.common_functionalities import normalize_scheduling_probabilities, \
-     get_ingress_nodes_and_cap, copy_input_files, create_input_file
+    get_ingress_nodes_and_cap, copy_input_files, create_input_file
 # for use with the flow-level simulator https://github.com/RealVNF/coordination-simulation (after installation)
 from siminterface.simulator import Simulator
 from spinterface import SimulatorAction
+from tqdm import tqdm
 
 # select which simulator to use by (un-)commenting the corresponding imports
 # from dummy_env import DummySimulator as Simulator
