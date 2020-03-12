@@ -1,0 +1,5 @@
+time,node,inter_arrival_mean
+0,pop0,10
+0,pop1,None
+1000,pop0,None
+1000,pop1,10
