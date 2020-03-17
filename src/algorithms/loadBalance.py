@@ -18,7 +18,7 @@ PROJECT_ROOT = str(Path(__file__).parent.parent.parent)
 
 
 def get_placement(nodes_list, sf_list):
-    """  places each sf in each node of the network
+    """  places each sf on each node of the network with some capacity
 
     Parameters:
         nodes_list
@@ -35,7 +35,7 @@ def get_placement(nodes_list, sf_list):
     return placement
 
 
-def get_schedule(nodes_list, sf_list, sfc_list):
+def get_schedule(nodes_list, nodes_with_cap, sf_list, sfc_list):
     """  return a dict of schedule for each node of the network
        '''
         Schedule is of the following form:
@@ -66,11 +66,14 @@ def get_schedule(nodes_list, sf_list, sfc_list):
         for sfc in sfc_list:
             for sf in sf_list:
                 # all 0's list
-                uniform_prob_list = [0 for _ in range(len(nodes_list))]
+                uniform_prob_list = [0 for _ in range(len(nodes_with_cap))]
                 # Uniformly distributing the schedules between all nodes
                 uniform_prob_list = normalize_scheduling_probabilities(uniform_prob_list)
                 for inner_node in nodes_list:
-                    schedule[outer_node][sfc][sf][inner_node] = uniform_prob_list.pop()
+                    if inner_node in nodes_with_cap:
+                        schedule[outer_node][sfc][sf][inner_node] = uniform_prob_list.pop()
+                    else:
+                        schedule[outer_node][sfc][sf][inner_node] = 0
     return schedule
 
 
@@ -108,13 +111,17 @@ def main():
     init_state = simulator.init(args.seed)
     log.info("Network Stats after init(): %s", init_state.network_stats)
     nodes_list = [node['id'] for node in init_state.network.get('nodes')]
+    nodes_with_capacity = []
+    for node in simulator.network.nodes(data=True):
+        if node[1]['cap'] > 0:
+            nodes_with_capacity.append(node[0])
     sf_list = list(init_state.service_functions.keys())
     sfc_list = list(init_state.sfcs.keys())
     ingress_nodes = get_ingress_nodes_and_cap(simulator.network)
-    # we place every sf in each node of the network, so placement is calculated only once
-    placement = get_placement(nodes_list, sf_list)
-    # Uniformly distributing the schedule for all Nodes
-    schedule = get_schedule(nodes_list, sf_list, sfc_list)
+    # we place every sf on each node of the network with some capacity, so placement is calculated only once
+    placement = get_placement(nodes_with_capacity, sf_list)
+    # Uniformly distributing the schedule for all Nodes with some capacity
+    schedule = get_schedule(nodes_list, nodes_with_capacity, sf_list, sfc_list)
     # Since the placement and the schedule are fixed , the action would also be the same throughout
     action = SimulatorAction(placement, schedule)
     # iterations define the number of time we wanna call apply()
