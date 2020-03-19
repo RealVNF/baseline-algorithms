@@ -4,7 +4,7 @@ import os
 from setuptools import setup, find_packages
 
 os.system('pip install git+https://github.com/RealVNF/common-utils.git')
-os.system('pip install git+https://github.com/RealVNF/coordination-simulation.git')
+os.system('pip install git+https://github.com/RealVNF/coord-sim.git')
 
 requirements = [
     'tqdm',
