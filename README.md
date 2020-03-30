@@ -1,5 +1,27 @@
 # baseline-algorithms
-Baseline algorithms for coordination of chained VNFs. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
+Baseline algorithms for coordination of service mesh consisting of multiple microservices. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/realvnf_logo.png?token=AIDTJSQ4PTVX6A4D6HSPDDC6RNE54" height="150" hspace="30"/>
+	<img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/upb.png?token=AIDTJSXSEB2M2BEFGFU4N3S6RNFGA" width="200" hspace="30"/>
+	<img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/huawei_horizontal.png?token=AIDTJSSKOEGP7GI6K5YIWUC6RNFH2" width="250" hspace="30"/>
+</p>
+
+
+## Citing this work
+
+If you are using this work in whole or in part in your project, please cite it as follows:
+
+```
+@inproceedings{schneider2020coordination,
+	author = {Schneider, Stefan and Khalili, Ramin and Manzoor, Adnan and Qarawlus, Haydar and Uthe, Sven and Karl, Holger and Hecker, Artur},
+	booktitle = {ACM SIGCOMM NetAI Workshop 2020 (SIGCOMM NetAI ’20)},
+	pages = {1--8},
+	title = {Self-Driving Coordination of Massively Scaled Services Using Deep Reinforcement Learning},
+	year = {2020},
+	note = {under review}
+}
+```
 
 ## Project structure
 
@@ -16,7 +38,7 @@ Baseline algorithms for coordination of chained VNFs. Includes Non-RL algorithms
 
 ### Load Balance algorithm
 
-Always returns equal distribution for all nodes and SFs. Places all SFs everywhere.
+Always returns equal distribution for all nodes having capacities and SFs. Places all SFs on  all nodes having some capacity.
 
 ### Shortest Path algorithm
 
@@ -70,3 +92,12 @@ bash scripts/run_simultaneous
 ```
 
 This would link the paths in the `network_files`, `config_files`, and `service_files`, as per line number and then run them for all the seeds within the `30seeds` file. E.g: Network file location at line no. 1 of `network_files` + Simulator Config file location at line no. 1 of `config_files` + SFC file location at line no. 1, would be run for all the seeds within the `30seeds` file. Similary for line numbers 2,3, and so on.
+
+## Acknowledgement
+
+This project has received funding from German Federal Ministry of Education and Research ([BMBF](https://www.bmbf.de/)) through Software Campus grant 01IS17046 ([RealVNF](https://realvnf.github.io/)).
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/software_campus.png?token=AIDTJSQS7WZNSZHFL23FNYS6RNFJK" width="200"/>
+	<img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/BMBF_sponsored_by.jpg?token=AIDTJSRMQYSKOC7K3EWIQ5S6RNFKW" width="250"/>
+</p>

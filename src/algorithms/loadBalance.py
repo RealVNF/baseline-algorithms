@@ -92,7 +92,6 @@ def main():
     args = parse_args()
     if not args.seed:
         args.seed = random.randint(1, 9999)
-    # os.makedirs("logs", exist_ok=True)
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("coordsim").setLevel(logging.WARNING)
 
@@ -128,7 +127,6 @@ def main():
     log.info(f"Running for {args.iterations} iterations...")
     for i in tqdm(range(args.iterations)):
         _ = simulator.apply(action)
-        # log.info("Network Stats after apply() # %s: %s", i + 1, apply_state.network_stats)
     # We copy the input files(network, simulator config....) to  the results directory
     copy_input_files(results_dir, os.path.abspath(args.network), os.path.abspath(args.service_functions),
                      os.path.abspath(args.config))
