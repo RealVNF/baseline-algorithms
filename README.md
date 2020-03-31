@@ -23,6 +23,8 @@ If you are using this work in whole or in part in your project, please cite it a
 }
 ```
 
+*Note: For the source code originally implemented and submitted to ACM SIGCOMM NetAI 2020, refer to the corresponding [release](https://github.com/RealVNF/baseline-algorithms/releases/tag/v1.0) or [branch](https://github.com/RealVNF/baseline-algorithms/tree/netai2020). The master branch will be continuously improved and extended.*
+
 ## Project structure
 
 * `src/algorithms`: Random Schedule, Shortest Path and Load Balance algorithm implementation.
