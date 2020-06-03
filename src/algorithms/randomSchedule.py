@@ -14,9 +14,6 @@ from siminterface.simulator import Simulator
 from spinterface import SimulatorAction
 from tqdm import tqdm
 
-# select which simulator to use by (un-)commenting the corresponding imports
-# from dummy_env import DummySimulator as Simulator
-
 log = logging.getLogger(__name__)
 DATETIME = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 PROJECT_ROOT = str(Path(__file__).parent.parent.parent)
@@ -99,7 +96,6 @@ def main():
     args = parse_args()
     if not args.seed:
         args.seed = random.randint(1, 9999)
-    # os.makedirs("logs", exist_ok=True)
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("coordsim").setLevel(logging.WARNING)
 

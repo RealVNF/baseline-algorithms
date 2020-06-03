@@ -18,8 +18,17 @@ PROJECT_ROOT = str(Path(__file__).parent.parent.parent)
 
 
 def get_closest_neighbours(network, nodes_list):
-    # Finding the closest neighbours to each node in the network. For each node of the network we maintain a list of
-    # neighbours sorted in increasing order of distance to it.
+    """
+    Finding the closest neighbours to each node in the network. For each node of the network we maintain a list of
+    neighbours sorted in increasing order of distance to it.
+    params:
+        network: A networkX graph
+        nodes_list: a list of nodes in the Network
+    Returns:
+         closest_neighbour: A dict containing lists of closest neighbour to each node in the network sorted in
+                            increasing order to distance.
+    """
+
     all_pair_shortest_paths = network.graph['shortest_paths']
     closest_neighbours = defaultdict(list)
     for source in nodes_list:
@@ -35,12 +44,13 @@ def get_closest_neighbours(network, nodes_list):
 
 def next_neighbour(index, num_vnfs_filled, node, placement, closest_neighbours, sf_list, nodes_cap):
     """
+    Finds the next available neighbour to the index node
     Args:
         index: closest neighbours of 'node' is a list, index tells which closest neighbour to start looking from
         num_vnfs_filled: Tells the number of VNFs present on all nodes e.g: every node in the network has atleast 1 VNF,
                           some might have more than that. This tells us the minimum every node has
         node: The node whose closest neighbour is to be found
-        placement: plaecement of VNFs in the entire network
+        placement: placeement of VNFs in the entire network
         closest_neighbours: neighbours of each node in the network in the increasing order of distance
         sf_list: The VNFs in the network
         nodes_cap: Capacity of each node in the network
@@ -180,7 +190,6 @@ def main():
     args = parse_args()
     if not args.seed:
         args.seed = random.randint(1, 9999)
-    # os.makedirs("logs", exist_ok=True)
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("coordsim").setLevel(logging.WARNING)
 
@@ -211,7 +220,6 @@ def main():
     log.info(f"Running for {args.iterations} iterations...")
     for i in tqdm(range(args.iterations)):
         _ = simulator.apply(action)
-        # log.info("Network Stats after apply() # %s: %s", i + 1, apply_state.network_stats)
     # We copy the input files(network, simulator config....) to  the results directory
     copy_input_files(results_dir, os.path.abspath(args.network), os.path.abspath(args.service_functions),
                      os.path.abspath(args.config))
