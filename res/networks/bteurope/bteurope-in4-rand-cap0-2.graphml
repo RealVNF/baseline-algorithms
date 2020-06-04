@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key attr.name="LinkFwdCap" attr.type="long" for="edge" id="d38" />
   <key attr.name="key" attr.type="long" for="edge" id="d37" />
   <key attr.name="id" attr.type="string" for="edge" id="d36" />
   <key attr.name="NodeCap" attr.type="long" for="node" id="d35" />
@@ -276,150 +277,187 @@
     <edge source="0" target="17">
       <data key="d36">e9</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="0" target="5">
       <data key="d36">e30</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="1" target="4">
       <data key="d36">e31</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="1" target="5">
       <data key="d36">e32</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="2" target="16">
       <data key="d36">e1</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="2" target="5">
       <data key="d36">e28</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="3" target="5">
       <data key="d36">e29</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="3" target="21">
       <data key="d36">e20</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="4" target="5">
       <data key="d36">e34</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="4" target="21">
       <data key="d36">e22</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="5" target="6">
       <data key="d36">e33</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="5" target="8">
       <data key="d36">e35</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="5" target="17">
       <data key="d36">e12</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="5" target="21">
       <data key="d36">e23</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="6" target="17">
       <data key="d36">e10</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="7" target="17">
       <data key="d36">e11</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="7" target="21">
       <data key="d36">e21</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="8" target="17">
       <data key="d36">e13</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="9" target="13">
       <data key="d36">e36</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="9" target="21">
       <data key="d36">e24</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="10" target="17">
       <data key="d36">e16</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="11" target="17">
       <data key="d36">e15</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="12" target="16">
       <data key="d36">e3</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="13" target="17">
       <data key="d36">e14</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="14" target="23">
       <data key="d36">e26</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="15" target="23">
       <data key="d36">e27</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="16" target="17">
       <data key="d36">e0</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="16" target="21">
       <data key="d36">e4</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="16" target="23">
       <data key="d36">e2</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="17" target="18">
       <data key="d36">e5</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="17" target="19">
       <data key="d36">e6</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="17" target="20">
       <data key="d36">e7</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="17" target="21">
       <data key="d36">e8</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="19" target="21">
       <data key="d36">e17</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="21" target="22">
       <data key="d36">e18</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="21" target="23">
       <data key="d36">e19</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <edge source="22" target="23">
       <data key="d36">e25</data>
       <data key="d37">0</data>
+      <data key="d38">1000</data>
     </edge>
     <data key="d0">16/11/10</data>
     <data key="d1">Europe</data>
