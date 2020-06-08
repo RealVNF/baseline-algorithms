@@ -87,7 +87,7 @@
       <data key="d31">4</data>
       <data key="d32">6.77616</data>
       <data key="d33">Dusseldorf</data>
-      <data key="d34">Normal</data>
+      <data key="d34">Ingress</data>
       <data key="d35">2</data>
     </node>
     <node id="5">
@@ -97,7 +97,7 @@
       <data key="d31">5</data>
       <data key="d32">8.68333</data>
       <data key="d33">Frankfurt</data>
-      <data key="d34">Normal</data>
+      <data key="d34">Ingress</data>
       <data key="d35">1</data>
     </node>
     <node id="6">
@@ -107,7 +107,7 @@
       <data key="d31">6</data>
       <data key="d32">8.55</data>
       <data key="d33">Zurich</data>
-      <data key="d34">Normal</data>
+      <data key="d34">Ingress</data>
       <data key="d35">1</data>
     </node>
     <node id="7">
@@ -117,7 +117,7 @@
       <data key="d31">7</data>
       <data key="d32">2.3488</data>
       <data key="d33">Paris</data>
-      <data key="d34">Normal</data>
+      <data key="d34">Ingress</data>
       <data key="d35">0</data>
     </node>
     <node id="8">
