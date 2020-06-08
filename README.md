@@ -1,4 +1,5 @@
 # baseline-algorithms
+
 Baseline algorithms for coordination of service mesh consisting of multiple microservices. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
 
 <p align="center">
@@ -7,46 +8,30 @@ Baseline algorithms for coordination of service mesh consisting of multiple micr
 	<img src="https://raw.githubusercontent.com/RealVNF/deep-rl-service-coordination/master/docs/huawei_horizontal.png?token=AIDTJSSKOEGP7GI6K5YIWUC6RNFH2" width="250" hspace="30"/>
 </p>
 
-
-## Citing this work
-
-If you are using this work in whole or in part in your project, please cite it as follows:
-
-```
-@inproceedings{schneider2020coordination,
-	author = {Schneider, Stefan and Khalili, Ramin and Manzoor, Adnan and Qarawlus, Haydar and Uthe, Sven and Karl, Holger and Hecker, Artur},
-	booktitle = {ACM SIGCOMM NetAI Workshop 2020 (SIGCOMM NetAI ’20)},
-	pages = {1--8},
-	title = {Self-Driving Coordination of Massively Scaled Services Using Deep Reinforcement Learning},
-	year = {2020},
-	note = {under review}
-}
-```
-
 ## Project structure
 
-* `src/algorithms`: Random Schedule, Shortest Path and Load Balance algorithm implementation.
-
+- `src/algorithms`: Random Schedule, Shortest Path and Load Balance algorithm implementation.
 
 ## Algorithms
 
 ### Random Schedule
 
-* Places all VNFs on all nodes of the networks
-* Creates random schedules for each source node, each SFC, each SF , each destination node
-* All the schedules for an SF sum-up to 1
+- Places all VNFs on all nodes of the networks
+- Creates random schedules for each source node, each SFC, each SF , each destination node
+- All the schedules for an SF sum-up to 1
 
 ### Load Balance algorithm
 
-Always returns equal distribution for all nodes having capacities and SFs. Places all SFs on  all nodes having some capacity.
+Always returns equal distribution for all nodes having capacities and SFs. Places all SFs on all nodes having some capacity.
 
 ### Shortest Path algorithm
 
 Based on network topology, SFC, and ingress nodes, calculates for each ingress node:
-* Puts 1st VNF on ingress, 2nd VNF on closest neighbor, 3rd VNF again on closest neighbor of 2nd VNF and so on.
-* Stores placement of VNFs and avoids placing 2 VNFs on the same node as long as possible. If all nodes are filled,
+
+- Puts 1st VNF on ingress, 2nd VNF on closest neighbor, 3rd VNF again on closest neighbor of 2nd VNF and so on.
+- Stores placement of VNFs and avoids placing 2 VNFs on the same node as long as possible. If all nodes are filled,
   continue placing a 2nd VNF on all nodes, but avoid placing 3 VNFs and so on.
-* Avoids nodes without any capacity at all (but ignores current utilization).
+- Avoids nodes without any capacity at all (but ignores current utilization).
 
 ## Installation
 
@@ -56,7 +41,6 @@ Requires [Python 3.6](https://www.python.org/downloads/release/) and (recommende
 python setup.py install
 ```
 
-
 ## Usage
 
 ### How to run the Random Schedule algorithm against the Simulator
@@ -64,6 +48,7 @@ python setup.py install
 ```bash
 rs -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 200
 ```
+
 For more information look at the [README](src/algorithms/README.md) of the Random Schedule.
 
 ### How to run the Load Balance algorithm against the Simulator
@@ -81,12 +66,14 @@ sp -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "r
 ### Using the simultaneous script to run multiple experiments:
 
 From [scripts directory](scripts) configure the following files:
+
 - [network_files](scripts/network_files.txt): 1 network file location per line
 - [config_files](scripts/config_files.txt): 1 simulator config. file location per line
 - [service_files](scripts/service_files.txt): 1 SFC file location per line
 - [30seeds](scripts/30seeds.txt): 1 seed per run of the simulator. By default using 30 seeds. Add/Remove as per requirement
 
 From the main directory (where the README.md file is) using a Terminal run:
+
 ```bash
 bash scripts/run_simultaneous
 ```
