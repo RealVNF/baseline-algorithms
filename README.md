@@ -42,12 +42,13 @@ Based on network topology, SFC, and ingress nodes, calculates for each ingress n
 On your local machine:
 
 ```bash
+# clone this repo and enter dir
+git clone --single-branch --branch cnsm2020 git@github.com:RealVNF/baseline-algorithms.git
+cd baseline-algorithms
 # create venv once
 python3.6 -m venv ./venv
 # activate the venv (always)
 source venv/bin/activate
-# update setuptools
-pip install -U setuptools
 ```
 
 ### Install dependencies from the main directory of the repo
