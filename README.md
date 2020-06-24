@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/RealVNF/baseline-algorithms.svg?branch=cnsm2020)](https://travis-ci.com/RealVNF/baseline-algorithms)
+
 # baseline-algorithms
 
 Baseline algorithms for coordination of service mesh consisting of multiple microservices. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
