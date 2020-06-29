@@ -3,9 +3,9 @@
 Baseline algorithms for coordination of service mesh consisting of multiple microservices. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/RealVNF/coord-sim/master/docs/realvnf_logo.png" height="150" hspace="30"/>
-	<img src="https://raw.githubusercontent.com/RealVNF/coord-sim/master/docs/upb.png" width="200" hspace="30"/>
-	<img src="https://raw.githubusercontent.com/RealVNF/coord-sim/master/docs/huawei_horizontal.png" width="250" hspace="30"/>
+  <img src="docs/realvnf_logo.png" height="150" hspace="30"/>
+	<img src="docs/upb.png" width="200" hspace="30"/>
+	<img src="docs/huawei_horizontal.png" width="250" hspace="30"/>
 </p>
 
 ## Project structure
@@ -35,18 +35,31 @@ Based on network topology, SFC, and ingress nodes, calculates for each ingress n
 
 ## Installation
 
-Requires [Python 3.6](https://www.python.org/downloads/release/) and (recommended) [venv](https://docs.python.org/3/library/venv.html).
+### Create a venv
+
+On your local machine:
 
 ```bash
-python setup.py install
+# create venv once
+python3.6 -m venv ./venv
+# activate the venv (always)
+source venv/bin/activate
 ```
+
+### Install dependencies from the main directory of the repo
+
+```bash
+pip install -r requirements.txt
+```
+
+This also installs the required [coord-sim](https://github.com/RealVNF/coord-sim) simulator and [common-utils](https://github.com/RealVNF/common-utils) package.
 
 ## Usage
 
 ### How to run the Random Schedule algorithm against the Simulator
 
 ```bash
-rs -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 200
+rs -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 1000
 ```
 
 For more information look at the [README](src/algorithms/README.md) of the Random Schedule.
@@ -54,16 +67,18 @@ For more information look at the [README](src/algorithms/README.md) of the Rando
 ### How to run the Load Balance algorithm against the Simulator
 
 ```bash
-lb -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 200
+lb -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 1000
 ```
 
 ### How to run the Load Balance algorithm against the Simulator
 
 ```bash
-sp -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 200
+sp -n "res/networks/triangle.graphml" -sf "res/service_functions/abc.yaml" -c "res/config/sim_config.yaml" -i 1000
 ```
 
-### Using the simultaneous script to run multiple experiments:
+### Using the parallel script to run multiple experiments:
+
+There is script provided in the `scripts` folder that utilizes the [GNU Parallel](https://www.gnu.org/software/parallel/) utility to run multiple experiments at the same time to speed up the process. It can run one algorithm at a time, so you need to choose the algo you wanna run at the beginning of the file.
 
 From [scripts directory](scripts) configure the following files:
 
@@ -75,16 +90,14 @@ From [scripts directory](scripts) configure the following files:
 From the main directory (where the README.md file is) using a Terminal run:
 
 ```bash
-bash scripts/run_simultaneous
+bash scripts/run_parallel
 ```
-
-This would link the paths in the `network_files`, `config_files`, and `service_files`, as per line number and then run them for all the seeds within the `30seeds` file. E.g: Network file location at line no. 1 of `network_files` + Simulator Config file location at line no. 1 of `config_files` + SFC file location at line no. 1, would be run for all the seeds within the `30seeds` file. Similary for line numbers 2,3, and so on.
 
 ## Acknowledgement
 
 This project has received funding from German Federal Ministry of Education and Research ([BMBF](https://www.bmbf.de/)) through Software Campus grant 01IS17046 ([RealVNF](https://realvnf.github.io/)).
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/RealVNF/coord-sim/master/docs/software_campus.png" width="200"/>
-	<img src="https://raw.githubusercontent.com/RealVNF/coord-sim/master/docs/BMBF_sponsored_by.jpg" width="250"/>
+	<img src="docs/software_campus.png" width="200"/>
+	<img src="docs/BMBF_sponsored_by.jpg" width="250"/>
 </p>
