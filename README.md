@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/RealVNF/baseline-algorithms.svg?branch=master)](https://travis-ci.com/RealVNF/baseline-algorithms)
+
 # baseline-algorithms
 
 Baseline algorithms for coordination of service mesh consisting of multiple microservices. Includes Non-RL algorithms (Random Schedule, Shortest Path, & Load Balance).
@@ -36,6 +38,8 @@ Based on network topology, SFC, and ingress nodes, calculates for each ingress n
 ## Installation
 
 ### Create a venv
+
+_Recommended for development_: Clone and install [coord-sim](https://github.com/RealVNF/coord-sim) and [common-utils](https://github.com/RealVNF/common-utils) locally first in the same venv before running the installation of the adapter in the `editable` mode: `pip install -e baseline-algorithms`
 
 On your local machine:
 
