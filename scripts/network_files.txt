@@ -1,6 +1,1 @@
 res/networks/abilene/abilene_4in_2x-cap.graphml
-res/networks/abilene/abilene_4in_3x-cap.graphml
-res/networks/abilene/abilene_4in_4x-cap.graphml
-res/networks/abilene/abilene_4in_5x-cap.graphml
-res/networks/abilene/abilene_4in_6x-cap.graphml
-res/networks/abilene/abilene_4in_7x-cap.graphml

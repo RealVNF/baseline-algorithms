@@ -3,9 +3,6 @@ import os
 
 from setuptools import setup, find_packages
 
-os.system('pip install git+https://github.com/RealVNF/common-utils.git')
-os.system('pip install git+https://github.com/RealVNF/coord-sim.git')
-
 requirements = [
     'tqdm',
     'common-utils',
@@ -18,7 +15,7 @@ test_requirements = [
 
 setup(
     name='baseline-algorithms',
-    version='1.0.0',
+    version='1.0.1',
     description="Baseline algorithms for coordination of chained VNFs",
     url='https://github.com/RealVNF/baseline-algorithms',
     package_dir={'': 'src'},
