@@ -10,11 +10,11 @@ sfc_list:
 # SF attributes (for now, processing delay)
 sf_list:
   a:
-    processing_delay_mean: 0.0
+    processing_delay_mean: 5.0
     processing_delay_stdev: 0.0
   b:
-    processing_delay_mean: 0.0
+    processing_delay_mean: 5.0
     processing_delay_stdev: 0.0
   c:
-    processing_delay_mean: 0.0
+    processing_delay_mean: 5.0
     processing_delay_stdev: 0.0

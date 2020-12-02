@@ -9,3 +9,4 @@ flow_dr_stdev: 0.0                 # default: 0.0
 flow_size_shape: 0.001             # default: 0.001
 deterministic_size: True
 run_duration: 100                  # default: 100
+ttl_choices: [60]
