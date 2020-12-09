@@ -1,5 +1,6 @@
 # GCASP: Greedy Coordination with Adaptive Shortest Paths
 # Code: https://github.com/CN-UPB/distributed-coordination/blob/master/src/algorithms/greedy/gpasp.py
+# Paper: http://dl.ifip.org/db/conf/cnsm/cnsm2020/1570653213.pdf
 
 import random
 import copy
