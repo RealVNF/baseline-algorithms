@@ -29,7 +29,7 @@ class SPRSimWrapper:
         return state, sim_state
 
     def apply(self, action):
-        if action >= len(self.node_and_neighbors):
+        if action is None or action >= len(self.node_and_neighbors):
             destination = None
         else:
             destination = self.node_and_neighbors[action]

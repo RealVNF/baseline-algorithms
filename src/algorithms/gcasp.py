@@ -19,6 +19,8 @@ class GCASP:
         self.simulator = sim_wrapper.simulator
         self.all_node_ids = list(self.simulator.network.nodes)
         self.network_degree = self.sim_wrapper.params.net_degree
+        # create a dict of sfcs
+        self.sfcs = self.simulator.sfc_list
         # copy of network for safe calculations without modifying real network
         self.network_copy = self.get_network_copy()
 
@@ -73,7 +75,13 @@ class GCASP:
             assert self.network_copy.number_of_edges() == self.simulator.params.network.number_of_edges(), \
                 'Post edge count mismatch with internal state!'
 
-    def select_neighbor(self, flow):
+    def drop_flow(self, flow):
+        """Since there's no drop flow option, just select a random action"""
+        flow.metadata['state'] = 'drop'
+        flow.metadata['path'] = []
+        return None
+
+    def select_neighbor(self, flow, link_rem_cap):
         """
         Select a neighbor by forwarding the flow along the precomputed path if possible. Else, reroute.
         """
@@ -103,15 +111,19 @@ class GCASP:
                 return self.get_neighbor(next_neighbor_id)
             except nx.NetworkXNoPath:
                 # all outgoing links are exhausted
-                flow.metadata['state'] = 'drop'
-                flow.metadata['path'] = []
+                return self.drop_flow(flow)
 
-        # default to random action
-        print("No neighbor selected!")
-        return random.randint(0, self.network_degree)
+        # this should never be reached
+        return None
 
     def compute_action(self, state):
-        """Copied and adjusted: https://github.com/CN-UPB/distributed-coordination/blob/master/src/algorithms/greedy/gpasp.py#L88"""
+        """
+        Copied and adjusted: https://github.com/CN-UPB/distributed-coordination/blob/master/src/algorithms/greedy/gpasp.py#L88
+        Computed action:
+        0 = process locally
+        i > 0 --> forward to neighbor i
+        None: drop flow
+        """
         # state: info about the incoming flow as well as node, link capacities, and distances of each neighbor
         flow = state['flow']
         node_rem_cap = state['rem_node_cap']
@@ -122,10 +134,8 @@ class GCASP:
             self.init_flow(flow)
 
         node_id = flow.current_node_id
-        # Is flow processed?
-        # if flow.current_position == len(flow.sfc_components):
-        if flow.processing_index == 1:
-            print(f"Flow {flow.flow_id} is processed completely")
+        # Is flow fully processed?
+        if flow.current_position == len(self.sfcs[flow.sfc]):
             # Needs the state to change?
             if flow.metadata['state'] != 'departure':
                 # yes => switch to departure, forward to egress node
@@ -135,8 +145,7 @@ class GCASP:
                 try:
                     self.set_new_path(flow)
                 except nx.NetworkXNoPath:
-                    flow.metadata['state'] = 'drop'
-                    flow.metadata['path'] = []
+                    return self.drop_flow(flow)
         else:
             # no, not fully processed
             if node_id == flow.metadata['target_node_id']:
@@ -147,8 +156,7 @@ class GCASP:
                 try:
                     self.set_new_path(flow)
                 except nx.NetworkXNoPath:
-                    flow.metadata['state'] = 'drop'
-                    flow.metadata['path'] = []
+                    return self.drop_flow(flow)
 
         # Determine Flow state
         if flow.metadata['state'] == 'greedy':
@@ -161,38 +169,17 @@ class GCASP:
                 return 0
             else:
                 # no => forward
-                return self.select_neighbor(flow)
+                return self.select_neighbor(flow, link_rem_cap)
 
         elif flow.metadata['state'] == 'departure':
             # Return to destination as soon as possible, no more processing necessary
             if node_id != flow.egress_node_id:
-                return self.select_neighbor(flow)
+                return self.select_neighbor(flow, link_rem_cap)
+            return 0
 
-        # fall back to action 0
-        print("No action selected, falling back to local processing!")
-        return 0
-
-
-    # def compute_action(self, state):
-    #     """
-    #     Select the next action according to GCASP algorithm.
-    #
-    #     :param state: Current simulator state for the given node.
-    #     :return: Action where 0 means process flow locally, and i>0 means forward to neighbor i
-    #     """
-    #     # state: info about the incoming flow as well as node, link capacities, and distances of each neighbor
-    #     flow = state['flow']
-    #     node_rem_cap = state['rem_node_cap']
-    #     link_rem_cap = state['rem_link_cap']
-    #     dist_to_eg = state['dist_to_eg']
-    #
-    #     # init metadata for flow, needed by GCASP
-    #     if not hasattr(flow, 'metadata'):
-    #         self.init_flow(flow)
-    #
-    #     action = random.randint(0, len(dist_to_eg))
-    #
-    #     return action
+        # Should never be reached.
+        print("No action selected. This shouldn't happen.")
+        return None
 
 
 # Click decorators
@@ -201,13 +188,13 @@ class GCASP:
 @click.argument('simulator_config', type=click.Path(exists=True))
 @click.argument('services', type=click.Path(exists=True))
 @click.argument('duration', type=int)
-@click.option('-s', '--seed', type=int, help="Set the simulator's seed", default=None)
+@click.argument('seed', type=int)
 def main(network, simulator_config, services, duration, seed):
     """
     SPR-RL DRL Scaling and Placement main executable
     """
     # Get or set a seed
-    if seed is None:
+    if seed is None or seed == 'None':
         seed = random.randint(0, 9999)
     print(f"Starting heuristic with seed: {seed}")
     # Create the parameters object
@@ -228,4 +215,5 @@ if __name__ == "__main__":
     services = "res/services/abc-start_delay0.yaml"
     sim_config = "res/simulator/mean-10-poisson.yaml"
     training_duration = "1000"
-    main([network, sim_config, services, training_duration])
+    seed = '1234'
+    main([network, sim_config, services, training_duration, seed])
