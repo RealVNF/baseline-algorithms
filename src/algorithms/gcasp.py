@@ -61,7 +61,7 @@ class GCASP:
         for link in flow.metadata['blocked_links']:
             self.network_copy.remove_edge(link[0], link[1])
         try:
-            shortest_path = nx.shortest_path(self.network_copy, flow.current_node_id, flow['target_node_id'],
+            shortest_path = nx.shortest_path(self.network_copy, flow.current_node_id, flow.metadata['target_node_id'],
                                              weight='delay')
             shortest_path.pop(0)
             flow.metadata['path'] = shortest_path
@@ -73,13 +73,9 @@ class GCASP:
             assert self.network_copy.number_of_edges() == self.simulator.params.network.number_of_edges(), \
                 'Post edge count mismatch with internal state!'
 
-    def forward_flow(self, flow):
+    def select_neighbor(self, flow):
         """
-        This function will handle the necessary actions to forward a flow from the associated node. A call to this
-        function requires the flow to have a precomputed path. If a flow can be forwarded along th precomputed path
-        the flow_forwarding_rules for the associated node will be set. If a flow cannot be forwarded, due missing link
-        resources, all incident links will be checked and all unsuitable links will be added to the blocked link list
-        of the flow. Subsequent a new path is attempted to calculate.
+        Select a neighbor by forwarding the flow along the precomputed path if possible. Else, reroute.
         """
         node_id = flow.current_node_id
         assert len(flow.metadata['path']) > 0
@@ -120,16 +116,16 @@ class GCASP:
         flow = state['flow']
         node_rem_cap = state['rem_node_cap']
         link_rem_cap = state['rem_link_cap']
-        dist_to_eg = state['dist_to_eg']
 
         # init metadata for flow, needed by GCASP
         if not hasattr(flow, 'metadata'):
             self.init_flow(flow)
 
         node_id = flow.current_node_id
-        new_target = False
         # Is flow processed?
-        if flow.current_position == len(flow.sfc_components):
+        # if flow.current_position == len(flow.sfc_components):
+        if flow.processing_index == 1:
+            print(f"Flow {flow.flow_id} is processed completely")
             # Needs the state to change?
             if flow.metadata['state'] != 'departure':
                 # yes => switch to departure, forward to egress node
@@ -150,7 +146,6 @@ class GCASP:
                 flow.metadata['blocked_links'] = []
                 try:
                     self.set_new_path(flow)
-                    new_target = True
                 except nx.NetworkXNoPath:
                     flow.metadata['state'] = 'drop'
                     flow.metadata['path'] = []
@@ -166,12 +161,12 @@ class GCASP:
                 return 0
             else:
                 # no => forward
-                return self.forward_flow(flow)
+                return self.select_neighbor(flow)
 
-        elif flow['state'] == 'departure':
+        elif flow.metadata['state'] == 'departure':
             # Return to destination as soon as possible, no more processing necessary
             if node_id != flow.egress_node_id:
-                return self.forward_flow(flow)
+                return self.select_neighbor(flow)
 
         # fall back to action 0
         print("No action selected, falling back to local processing!")
