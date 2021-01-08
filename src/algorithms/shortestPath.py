@@ -190,7 +190,7 @@ def main():
     args = parse_args()
     if not args.seed:
         args.seed = random.randint(1, 9999)
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARNING)
     logging.getLogger("coordsim").setLevel(logging.WARNING)
 
     # Creating the results directory variable where the simulator result files will be written
